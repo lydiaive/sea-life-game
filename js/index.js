@@ -44,9 +44,13 @@ window.onload = () => {
             const fish = new Fish
             const worm = new Worm
             const hook = new Hook
-            const eal = new Eal
+            const eal = new Eel
 
             let healthPoints = 10;
+            let level = 1;
+            let speed = 1;
+            let arrLengthPlant = 7;
+            let arrLengthEel = 1;
             
 
             document.addEventListener("keydown", (e) => {
@@ -357,7 +361,7 @@ window.onload = () => {
             }
     }
 
-    class Eal {
+    class Eel {
         constructor() {
           this.x = 0,
           this.y = (Math.floor(Math.random() * 500) ),
@@ -378,7 +382,6 @@ window.onload = () => {
           }
         }
     }
-
 
 
     function shortenArr() {
