@@ -6,7 +6,7 @@ const ctx = canvas.getContext('2d');
 const backgrImg = new Image();
 backgrImg.src = "/images/finalback.jpg"
 
-const fishImg = new Image();
+let fishImg = new Image();
 fishImg.src = "/images/fish-fin.png"
 
 const planBottImg = new Image();
@@ -38,8 +38,6 @@ window.onload = () => {
 
         function startGame() {
 
-            
-
             const background = new Background
             const fish = new Fish
             const worm = new Worm
@@ -49,8 +47,9 @@ window.onload = () => {
             let healthPoints = 10;
             let level = 1;
             let speed = 1;
-            let arrLengthPlant = 7;
+            let arrLengthPlant = 4;
             let arrLengthEel = 1;
+
             
 
             document.addEventListener("keydown", (e) => {
@@ -62,6 +61,8 @@ window.onload = () => {
                   fish.draw()
                 }
               })
+            
+            
 
             const checkCollection = () => {
             if (fish.contains(worm)){
@@ -77,9 +78,9 @@ window.onload = () => {
                     worm.getPulledUp()
                     hook.getPulledUp()
                     gameOver()
-                }
-            } 
-        }
+                    }
+                } 
+            }
 
             const checkTrap = () => {
                 if (worm.trap == false) {
@@ -90,8 +91,8 @@ window.onload = () => {
                     hook.h = worm.y
                     hook.draw()
                     hook.move()
-                    }
                 }
+            }
             
             const checkCollitions = () => {
                 for (element of plantBottomArr) {
@@ -103,15 +104,22 @@ window.onload = () => {
                             }, 1000);
                         }
                     }
-                }
+            }
+            const checkWound = () => {
+                if (!fish.wounded) {
+                    fishImg.src = "/images/fish-fin.png"
+                } else {
+                    fishImg.src = "/images/fish-hurt.png"
+                    }
+                } 
 
             const checkCollisions = () => {
-            if (fish.contains(eal) && !fish.wounded) {
+            if (fish.contains(eal) && !fish.wounded && !fish.gameStop) {
                 healthPoints -= 2
                 fish.wounded = true
                     setTimeout(function(){
                             fish.wounded = false
-                        }, 1000);
+                        }, 700);
                     }
             }
             
@@ -120,7 +128,7 @@ window.onload = () => {
                 ctx.fillStyle = "white"
                 ctx.font = "24px Arial"
                 ctx.fillText(`Score: ${score}`, 840,40)
-              }
+            }
 
             const drawHealth = () => {
                 ctx.fillStyle = "white"
@@ -129,25 +137,46 @@ window.onload = () => {
             }
 
             const gameOver = () => {
-            background.gameStop = true
-            fish.gameStop = true
-            worm.gameStop = true
-            hook.gameStop = true
-            eal.gameStop = true
-            clearInterval(setInterval)
-            plantBottomArr.forEach(el => {
-                el.gameStop = true
-            })
-            plantBottomArr = []
+                background.gameStop = true
+                fish.gameStop = true
+                worm.gameStop = true
+                hook.gameStop = true
+                eal.gameStop = true
+                clearInterval(setInterval)
+                plantBottomArr.forEach(el => {
+                    el.gameStop = true
+                    })
+                plantBottomArr = []
             }
             
 
             const pause = () => {
-            background.gameStop = true
-            fish.gameStop = true
-            worm.gameStop = true
-            hook.gameStop = true
+                background.gameStop = true
+                fish.gameStop = true
+                worm.gameStop = true
+                hook.gameStop = true
             }
+
+            const createSeaweed = () => {
+                while (arrLengthPlant > 0) {
+                    const plantBottom = new SeaweedBottom
+                    const plantTop = new SeaweedTop
+                    plantBottomArr.unshift(plantBottom)
+                    plantBottomArr.unshift(plantTop)
+                    arrLengthPlant --
+                    console.log(plantBottomArr)
+                }
+            }
+            createSeaweed()
+            /* setInterval(() => {
+                if (!fish.gameStop) {
+                const plantBottom = new SeaweedBottom()
+                const plantTop = new SeaweedTop
+                plantBottomArr.unshift(plantBottom)
+                plantBottomArr.unshift(plantTop)
+                console.log(plantBottomArr)}
+            }, 5000) */
+
 
             const drawSeaweed = () => {
             plantBottomArr.forEach(el => { 
@@ -165,15 +194,6 @@ window.onload = () => {
             } 
 
 
-            
-            setInterval(() => {
-                if (!fish.gameStop) {
-                const plantBottom = new SeaweedBottom()
-                const plantTop = new SeaweedTop
-                plantBottomArr.unshift(plantBottom)
-                plantBottomArr.unshift(plantTop)
-                console.log(plantBottomArr)}
-            }, 5000)
 
             const update = () => {
                 ctx.clearRect(0,0,canvas.width, canvas.height)
@@ -189,8 +209,9 @@ window.onload = () => {
                 checkCollection()
                 checkTrap()
                 checkHealth()
+                checkWound()
                 drawSeaweed()
-                shortenArr()
+                // shortenArr()
                 checkCollitions()
                 checkCollisions()
                 requestAnimationFrame(update)
@@ -261,10 +282,10 @@ window.onload = () => {
 
     class SeaweedBottom {
         constructor() {
-          this.x = -(Math.floor(Math.random() * 500) ),
-          this.y = (canvas.height - 200),
-          this.w = 80,
-          this.h = 200,
+          this.x = -(Math.floor(Math.random() * 2000) ),
+          this.y = (canvas.height - (Math.floor(Math.random() * 100) )),
+          this.w = 60,
+          this.h = 300,
       
           this.gameStop = false
         }
@@ -277,16 +298,17 @@ window.onload = () => {
             this.x += 2
         }   if (this.x > 1000) {
             this.x = 0
+            this.y = (canvas.height - (Math.floor(Math.random() * 200) ))
         }
           }
     }
 
     class SeaweedTop {
         constructor() {
-          this.x = -(Math.floor(Math.random() * 100) ),
-          this.y = 0,
-          this.w = 80,
-          this.h = (Math.floor(Math.random() * 300)+ 120),
+          this.x = -(Math.floor(Math.random() * 2000) ),
+          this.y = -10,
+          this.w = 60,
+          this.h = (Math.floor(Math.random() * 180)+ 70),
       
           this.gameStop = false
         }
@@ -299,7 +321,7 @@ window.onload = () => {
             this.x += 2
         }   if (this.x > 1000) {
             this.x = 0
-            this.h = (Math.floor(Math.random() * 300) )
+            this.h = (Math.floor(Math.random() * 200)+ 120)
         }
           }
     }
@@ -307,7 +329,7 @@ window.onload = () => {
     class Worm {
         constructor() {
           this.x = 0,
-          this.y = Math.floor(Math.random() * 470)+ 100,
+          this.y = Math.floor(Math.random() * 400)+ 100,
           this.w = 30,
           this.h = 30,
       
@@ -384,11 +406,11 @@ window.onload = () => {
     }
 
 
-    function shortenArr() {
+/*     function shortenArr() {
         if (plantBottomArr.length < 10) {
             return }
             plantBottomArr.splice(10)
-        } 
+        }  */
 
     function drawGameOver() {
         let text = 'GAME OVER'
