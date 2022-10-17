@@ -1,0 +1,61 @@
+/* 
+
+color palet:
+
+light blue #4ac7f4
+dark blue #0281bb
+darker blue #0070a2
+sand #f9b143
+
+*/
+
+
+body {
+    margin: 0;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    background-image: url(/images/main-img.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-color: #4ac7f4;
+}
+
+header {
+    width: 100vw;
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+h1 {
+    border: 3px solid #0070a2;
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 64px;
+    color: #0070a2;
+    
+    text-transform: uppercase;
+}
+#start-button {
+    background-color: #f9b143;
+    border: 3px solid white;
+    border-radius: 5px;
+    padding: 20px;
+    font-size: 2rem;
+    text-transform: uppercase;
+    color: white;
+    cursor: pointer;
+}
+#game-container {
+    display: flex;
+    justify-content: center;
+}
+#canvas {
+    background-color: white;
+    border: 3px solid #f9b143;
+}
+#highscore-banner {
+    font-size: 3rem;
+    color: #f9b143;
+}
