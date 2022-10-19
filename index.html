@@ -11,7 +11,7 @@
     <header>
         <h1>Sea-Life Game</h1>
         <p>Let yourself be blown away by the depth of the Ocean!</p>
-        <button id="start-button" class="play-button">Start Game</button>
+        <button id="start-button" class="start-button">Start Game</button>
     </header>
     <section id="highscore-banner" class="banner hidden">
         <marquee behavior="scroll" direction="left">
@@ -22,65 +22,53 @@
         <h2>Chose your Character:</h2>
         <div class="character-container">        
             <div class="character-card">
-                <div class="card-top card1"><img src="/images/octo.png" width="250px"></div>
+                <div class="card-top card1"><img src="/images/yellow-fish.png" width="200px"></div>
                 <p>Lex</p>
                 <button id="lex" class="character-button">Go with me</button>
             </div>
             <div class="character-card">
-                <div class="card-top card2"><img src="/images/fish-fin.png" width="250px"></div>
+                <div class="card-top card2"><img src="/images/fish-fin.png" width="200px"></div>
                 <p>Nemo</p>
                 <button id="nemo" class="character-button">Go with me</button>
             </div>
             <div class="character-card">
-                <div class="card-top card3"><img src="/images/crab.png" width="250px"></div>
+                <div class="card-top card3"><img src="/images/clown-fish.png" width="200px"></div>
                 <p>Cro</p>
                 <button id="cro" class="character-button">Go with me</button>
             </div>
             <div id="finn" class="character-card">
-                <div class="card-top card4"><img src="/images/shark.png" width="250px"></div>
+                <div class="card-top card4"><img src="/images/pink-fish.png" width="200px"></div>
                 <p>Finn</p>
                 <button id="finn" class="character-button">Go with me</button>
             </div>
         </div>
         <button id="close-selection-modal" class="close-modal">X</button>
-        <!-- <button class="play-button">Play</button> -->
     </section>
     
     <section id="game-container" class="game modal hidden">
         <div id="legend">
             <div id="legend-list">
                 <h2>Legend:</h2>
-                <article><h3>Movement:</h3>
                     <ul>
-                        <li><img class="icon" src="" alt="">move up</li>
-                        <li><img class="icon" src="" alt="">move down</li>
-                    </ul>
-                </article>
-                <article>
-                    <h3>Treats:</h3>
-                    <ul>
+                        <li><img class="icon" src="/images/arrows.png" alt="">move Fish</li>
                         <li><img class="icon" src="/images/worm.webp" alt="">+200 Points</li>
-                        <li><img class="icon" src="/images/heart.png" alt="">+1 Health</li>
                     </ul>
-                </article>
-                <article>
-                    <h3>Enemies:</h3>
                     <ul>
-                        <li><img class="icon" src="/images/seaweedup1.png" alt="">-1 Health</li>
-                        <li><img class="icon" src="/images/eel1.png" alt=""><img class="icon" src="/images/kraken2.png" alt="">-2 Health</li>
+                        <li><img class="icon" src="/images/heart.png" alt="">+1 Health</li>
+                        <li><img class="icon" src="/images/seaweed-icon.png" alt="">-1 Health</li>
                     </ul>
-                </article>
-                <article>
-                    <h3>Trap::</h3>
+                    <ul>
+                        <li><img class="icon" src="/images/eel1.png" alt="">-2 Health</li>
+                        <li><img class="icon" src="/images/kraken2.png" alt="">-2 Health</li>
+                    </ul>
                     <ul>
                         <li><img class="icon" src="/images/worm(2).png" alt="">Game Over</li>
                     </ul>
-                </article>
             </div>
             <button id="play-button" class="play-button">Start</button>
         </div>
         <div>
-            <canvas id="canvas" width="1400" height="700"></canvas>
+            <canvas id="canvas" width="1000" height="500"></canvas>
         </div>
         <button id="close-game-modal" class="close-modal" onClick="window.location.reload()">X</button>
     </section>

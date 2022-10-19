@@ -16,7 +16,12 @@ const choseNemoBtn = document.getElementById('nemo');
 const choseCroBtn = document.getElementById('cro');
 const choseFinnBtn = document.getElementById('finn');
 
-
+const drawGameOver = () => {
+    let text = 'GAME OVER'
+    ctx.fillStyle = "white"
+    ctx.font = "70px Arial"
+    ctx.fillText(text, 40,200)
+    }
 
 // IMAGE-COLLECTION:
 const backgrImg = new Image();
@@ -26,13 +31,13 @@ let fishImg = new Image();
 fishImg.src = "/images/fish-fin.png" // "/images/fish-hurt.png"
 
 let crabImg = new Image();
-crabImg.src = "/images/crab.png" // "/images/crab-hurt.png"
+crabImg.src = "/images/clown-fish.png" // "/images/crab-hurt.png"
 
 let octoImg = new Image();
-octoImg.src = "/images/octo.png" // "/images/octo-hurt.png"
+octoImg.src = "/images/yellow-fish.png" // "/images/yellow-fish-hurt.png"
 
 let sharkImg = new Image();
-sharkImg.src = "/images/shark.png" // "/images/shark-hurt.png"
+sharkImg.src = "/images/pink-fish.png" // "/images/shark-hurt.png"
 
 const planBottImg = new Image();
 planBottImg.src = "/images/seaweedup1.png"
@@ -105,8 +110,7 @@ window.onload = () => {
         console.log(startGameBtn)
         startGame();
     }
-
-    
+   
 
     function startGame() {
         console.log('Game started')
@@ -126,11 +130,6 @@ window.onload = () => {
         
         // let arrLengthEel = 1;
 
-        /* document.getElementById('pause-button').onclick = () => {
-            startGameBtn.id = 'pause-button';
-            console.log(startGameBtn)
-            startGame();
-        } */
         startGameBtn.onclick = () => { 
             if (startGameBtn.id === 'pause-button') {
             pauseGame()
@@ -146,8 +145,14 @@ window.onload = () => {
         
 
         document.addEventListener("keydown", (e) => {
-            if (e.keyCode === 38){
+            if (e.keyCode === 37){
+                fish.moveForward()
+                fish.draw()
+            } else if (e.keyCode === 38){
                 fish.moveUp()
+                fish.draw()
+            } else if (e.keyCode === 39){
+                fish.moveBack()
                 fish.draw()
             } else if (e.keyCode === 40){
                 fish.moveDown()
@@ -199,7 +204,7 @@ window.onload = () => {
                 wormImg.src = "/images/worm.webp" 
                 return
             } else {
-                wormImg.src = "/images/worm(2).png"
+                wormImg.src = "/images/worm(3).png"
                 hook.h = worm.y
                 hook.draw()
                 hook.move()
@@ -234,25 +239,42 @@ window.onload = () => {
                     }, 700);
                 }
         }
+
+        const checkCollisionsKraken = () => {
+            if (fish.contains(kraken) && !fish.wounded && !fish.gameStop) {
+                healthPoints -= 2
+                fish.wounded = true
+                    setTimeout(function(){
+                            fish.wounded = false
+                        }, 1000);
+                    }
+            }
         
 
         const drawScore = () => {
             ctx.fillStyle = "white"
             ctx.font = "24px Arial"
-            ctx.fillText(`Score: ${score}`, 1140,40)
+            ctx.fillText(`Score: ${score}`, 840,40)
         }
 
         const drawHealth = () => {
             ctx.fillStyle = "white"
             ctx.font = "24px Arial"
-            ctx.fillText(`Health: ${healthPoints}`, 780,40)
+            ctx.fillText(`Health: ${healthPoints}`, 440,40)
         }
 
         const drawLevel = () => {
             ctx.fillStyle = "white"
             ctx.font = "24px Arial"
-            ctx.fillText(`Level ${level}`, 980,40)
+            ctx.fillText(`Level ${level}`, 640,40)
         }
+
+        const drawGameOver = () => {
+            let text = 'GAME OVER'
+            ctx.fillStyle = "white"
+            ctx.font = "70px Arial"
+            ctx.fillText(text, 40,200)
+            }
 
         const gameOver = () => {
             background.gameStop = true
@@ -303,7 +325,6 @@ window.onload = () => {
                 plantBottomArr.unshift(plantBottom)
                 plantBottomArr.unshift(plantTop)
                 arrLengthPlant --
-                console.log(plantBottomArr)
             }
         }
         createSeaweed()
@@ -348,6 +369,7 @@ window.onload = () => {
             drawSeaweed()
             checkCollisionPlant()
             checkCollisionsEel()
+            checkCollisionsKraken()
             checkCollectionLife()
             requestAnimationFrame(update)
             }
@@ -358,10 +380,10 @@ window.onload = () => {
     
     class Background {
         constructor() {
-          this.x = -2800,
+          this.x = -2000,
           this.y = 0,
-          this.w = 4200,
-          this.h = 700,
+          this.w = 3000,
+          this.h = 500,
       
           this.gameStop = false
         }
@@ -373,17 +395,17 @@ window.onload = () => {
             if (!this.gameStop) {
             this.x += 2*speed
         }   if (this.x > 0) {
-            this.x = -2800
+            this.x = -2000
         }
           }
     }
 
     class Fish {
         constructor() {
-          this.x = 900,
-          this.y = 350,
-          this.w = 85,
-          this.h = 55,
+          this.x = 800,
+          this.y = 250,
+          this.w = 60,
+          this.h = 50,
 
           this.wounded = false,
           this.gameStop = false
@@ -392,14 +414,24 @@ window.onload = () => {
           ctx.drawImage(playerImg, this.x, this.y, this.w, this.h)
         }
         moveUp() {
-            if (this.y <= 0 || this.gameStop == true) {
-              return
-            } this.y -= 30
-          }
+        if (this.y <= 0 || this.gameStop == true) {
+            return
+        } this.y -= 30
+        }
         moveDown() {
         if (this.y >= (canvas.height - 20) || this.gameStop == true) {
             return
         } this.y += 30
+        }
+        moveForward() {
+        if (this.x <= 600 || this.gameStop == true) {
+            return
+        } this.x -= 15
+        }
+        moveBack() {
+        if (this.x >= 900 || this.gameStop == true) {
+            return
+        } this.x += 15  
         }
         getPulledUp() {
             if (this.y > 0) {
@@ -417,10 +449,10 @@ window.onload = () => {
 
     class SeaweedBottom {
         constructor() {
-          this.x = -(Math.floor(Math.random() * 2800) ),
-          this.y = (canvas.height - (Math.floor(Math.random() * 100) )),
-          this.w = 60,
-          this.h = 420,
+          this.x = -(Math.floor(Math.random() * 2000) ),
+          this.y = (canvas.height - (Math.floor(Math.random() * 140) + 70)),
+          this.w = 40,
+          this.h = 350,
       
           this.gameStop = false
         }
@@ -431,19 +463,19 @@ window.onload = () => {
         move() {
             if (!this.gameStop) {
             this.x += 2*speed
-        }   if (this.x > 1400) {
+        }   if (this.x > 1000) {
             this.x = 0
-            this.y = (canvas.height - (Math.floor(Math.random() * 280) ))
+            this.y = (canvas.height - (Math.floor(Math.random() * 140) + 70))
         }
           }
     }
 
     class SeaweedTop {
         constructor() {
-          this.x = -(Math.floor(Math.random() * 2800) ),
+          this.x = -(Math.floor(Math.random() * 2000) ),
           this.y = -10,
-          this.w = 60,
-          this.h = (Math.floor(Math.random() * 350)+ 100),
+          this.w = 40,
+          this.h = (Math.floor(Math.random() * 130)+ 70),
       
           this.gameStop = false
         }
@@ -454,9 +486,9 @@ window.onload = () => {
         move() {
             if (!this.gameStop) {
             this.x += 2*speed
-        }   if (this.x > 1400) {
+        }   if (this.x > 1000) {
             this.x = 0
-            this.h = (Math.floor(Math.random() * 180)+ 70)
+            this.h = (Math.floor(Math.random() * 130)+ 70)
         }
           }
     }
@@ -464,9 +496,9 @@ window.onload = () => {
     class Worm {
         constructor() {
           this.x = 0,
-          this.y = Math.floor(Math.random() * 490)+ 140,
-          this.w = 40,
-          this.h = 40,
+          this.y = Math.floor(Math.random() * 350)+ 50,
+          this.w = 30,
+          this.h = 30,
       
           this.gameStop = false,
           this.trap = false
@@ -477,9 +509,9 @@ window.onload = () => {
         move() {
             if (!this.gameStop) {
             this.x += 2*speed
-        }   if (this.x > 1400) {
+        }   if (this.x > 1000) {
             this.x = 0
-            this.y = Math.floor(Math.random() * 490)+ 140
+            this.y = Math.floor(Math.random() * 350)+ 50
             this.trap = Boolean(Math.round(Math.random()))
         }
           }
@@ -507,7 +539,7 @@ window.onload = () => {
         move() {
             if (!this.gameStop) {
             this.x += 2*speed
-        }   if (this.x > 1400) {
+        }   if (this.x > 1000) {
             this.x = 0
           }
         }
@@ -521,9 +553,9 @@ window.onload = () => {
     class Eel {
         constructor() {
           this.x = -780,
-          this.y = (Math.floor(Math.random() * 560)+ 70 ),
-          this.w = 250,
-          this.h = 55,
+          this.y = (Math.floor(Math.random() * 400)+ 50 ),
+          this.w = 180,
+          this.h = 40,
       
           this.gameStop = false
         }
@@ -533,18 +565,18 @@ window.onload = () => {
         move() {
             if (!this.gameStop) {
             this.x += 3.5*speed
-        }   if (this.x > 1400) {
+        }   if (this.x > 1000) {
             this.x = 0
-            this.y = (Math.floor(Math.random() * 560)+ 70 )
+            this.y = (Math.floor(Math.random() * 400)+ 50 )
           }
         }
     }
     class Kraken {
         constructor() {
-          this.x = -300,
+          this.x = -5000,
           this.y = (Math.floor(Math.random() * 500)+ 70 ),
-          this.w = 250,
-          this.h = 210,
+          this.w = 200,
+          this.h = 170,
 
           this.direction = 'up'
       
@@ -554,54 +586,35 @@ window.onload = () => {
             ctx.drawImage(krakenImg, this.x, this.y, this.w, this.h)
         }
         move() {
-            /* if (!this.gameStop && this.y > 700) {
-                this.moveUp()
-                console.log('under y')
-            }
-            if (!this.gameStop && this.y <= 700) {
-                console.log('should go down')
-            this.moveDown()
-        }   if (this.x > 1400) { 
-                this.x = -300
-                this.y = (Math.floor(Math.random() * 700) )
-          } */
 
-          if (this.y < 700) {
+          if (this.y > -15 && this.y < 0) {
             this.direction = 'down'
-          } else if (this.y >= 700) {
-            this.directioon = 'up'
+          } 
+          if (this.y > 450 && this.y < 465)  {
+            this.direction = 'up'
           }
 
-          if (this.direction ==='up') {
-            this.x += 2*speed
-            this.y -= 2*speed
-          }else {
-            this.x += 2*speed
-            this.y += 2*speed
+          if (!this.gameStop && this.direction ==='up') {
+            this.x += 1.8*speed
+            this.y -= 1.2*speed
+          }else if ((!this.gameStop && this.direction ==='down')) {
+            this.x += 1.8*speed
+            this.y += 1.2*speed
           }
 
-          if (this.x > 1400) { 
-            this.x = -300
-            this.y = (Math.floor(Math.random() * 700) )
-      }     console.log(this.y)
-            console.log(this.direction)
-        } 
-       /*  moveDown() {
-            this.x += 2*speed
-            this.y += 2*speed
-        }
-        moveUp() {
-            this.x += 2*speed
-            this.y -= 2*speed
-        } */
+          if (this.x > 1000) { 
+            this.x = -(Math.floor(Math.random() * 8000) )
+            this.y = (Math.floor(Math.random() * 500) )
+            }   
+        }  
     }
 
     class Life {
         constructor() {
           this.x = -10000,
-          this.y = Math.floor(Math.random() * 420)+ 140,
-          this.w = 55,
-          this.h = 50,
+          this.y = Math.floor(Math.random() * 300)+ 100,
+          this.w = 40,
+          this.h = 35,
       
           this.gameStop = false
         }
@@ -611,19 +624,11 @@ window.onload = () => {
         move() {
             if (!this.gameStop) {
             this.x += 2*speed
-        }   if (this.x > 1400) {
+        }   if (this.x > 1000) {
             this.x = -7000
-            this.y = Math.floor(Math.random() * 420)+ 140
+            this.y = Math.floor(Math.random() * 300)+ 100
             }
         }
     }
-
-
-    function drawGameOver() {
-        let text = 'GAME OVER'
-        ctx.fillStyle = "white"
-        ctx.font = "80px Arial"
-        ctx.fillText(text, 40,200)
-        }
 
 }

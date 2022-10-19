@@ -38,7 +38,7 @@ h1 {
     
     text-transform: uppercase;
 }
-.play-button {
+.start-button {
     background-color: #f9b143;
     border: 3px solid white;
     border-radius: 5px;
@@ -50,11 +50,23 @@ h1 {
     margin: 15px;
     min-width: 220px;
 }
+.play-button {
+    background-color: #f9b143;
+    border: 3px solid white;
+    border-radius: 5px;
+    padding: 15px;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    color: white;
+    cursor: pointer;
+    margin: 15px;
+    min-width: 160px;
+}
 
 #canvas {
     background-image: url(/images/finalback.jpg);
     background-repeat: no-repeat;
-    background-size: 3000px 700px;
+    background-size: 3000px 500px;
     border: 3px solid #f9b143;
 }
 .banner {
@@ -70,6 +82,24 @@ h1 {
     width: 80%;
     height: 80%;
 }
+@media (max-width: 1300px){
+    .modal {
+        position: absolute;
+        top: 5%;
+        left: 5%;
+        width: 90%;
+        height: 90%;
+    }
+}
+@media (max-width: 1120px){
+    .modal {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
 .close-modal {
     position: absolute;
     top: 10px;
@@ -77,8 +107,8 @@ h1 {
     margin: auto;
     opacity: .7;
     font-weight: bold;
-    font-size: 2rem;
-    width:42px;
+    font-size: 1.4rem;
+    width:36px;
 }
 .selection {
     display: flex;
@@ -106,8 +136,8 @@ h1 {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    height: 500px;
-    width: 300px;
+    height: 460px;
+    width: 250px;
     background-color: #aee4fe;
     border-radius: 15px;
     color: #f9b143;
@@ -148,7 +178,7 @@ h1 {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content:space-around;
+    justify-content:space-evenly;
     width: 100%;
 }
 #legend-list {
