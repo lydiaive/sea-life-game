@@ -8,6 +8,9 @@ const closeModalBtn = document.getElementById('close-selection-modal');
 const gameModal =document.getElementById('game-container');
 const closeGameBtn = document.getElementById('close-game-modal');
 
+const startGameBtn = document.getElementById('play-button')
+
+
 const choseLexBtn = document.getElementById('lex');
 const choseNemoBtn = document.getElementById('nemo');
 const choseCroBtn = document.getElementById('cro');
@@ -96,10 +99,14 @@ window.onload = () => {
     })
     
 
-    document.getElementById('play-button').onclick = () => {
-        console.log(document.getElementById('play-button'))
+    startGameBtn.onclick = () => {
+        startGameBtn.id = 'pause-button'
+        startGameBtn.innerText = 'PAUSE'
+        console.log(startGameBtn)
         startGame();
     }
+
+    
 
     function startGame() {
         console.log('Game started')
@@ -119,6 +126,23 @@ window.onload = () => {
         
         // let arrLengthEel = 1;
 
+        /* document.getElementById('pause-button').onclick = () => {
+            startGameBtn.id = 'pause-button';
+            console.log(startGameBtn)
+            startGame();
+        } */
+        startGameBtn.onclick = () => { 
+            if (startGameBtn.id === 'pause-button') {
+            pauseGame()
+            startGameBtn.innerText = 'CONTINUE'
+            startGameBtn.id = 'continue-button'}
+            else {
+                continueGame()
+                startGameBtn.id = 'pause-button'
+                startGameBtn.innerText = 'PAUSE'
+            }
+            console.log(startGameBtn.innerText)
+        }
         
 
         document.addEventListener("keydown", (e) => {
@@ -148,7 +172,7 @@ window.onload = () => {
             hook.x = 0
             wormCount ++
             score += 200
-                if (score % 2000 === 0) {
+                if (score % 1000=== 0) {
                     levelUp()
                 }
             } else if (worm.trap == true){
@@ -242,14 +266,34 @@ window.onload = () => {
                 el.gameStop = true
                 })
             plantBottomArr = []
+            startGameBtn.classList.add("hidden")
         }
         
 
-        const pause = () => {
+        const pauseGame = () => {
             background.gameStop = true
             fish.gameStop = true
             worm.gameStop = true
             hook.gameStop = true
+            eel.gameStop = true
+            life.gameStop = true
+            kraken.gameStop = true
+            plantBottomArr.forEach(el => {
+                el.gameStop = true
+                })
+        }
+
+        const continueGame= () => {
+            background.gameStop = false
+            fish.gameStop = false
+            worm.gameStop = false
+            hook.gameStop = false
+            eel.gameStop = false
+            life.gameStop = false
+            kraken.gameStop = false
+            plantBottomArr.forEach(el => {
+                el.gameStop = false
+                })
         }
 
         const createSeaweed = () => {
@@ -497,10 +541,12 @@ window.onload = () => {
     }
     class Kraken {
         constructor() {
-          this.x = -6000,
+          this.x = -300,
           this.y = (Math.floor(Math.random() * 500)+ 70 ),
           this.w = 250,
           this.h = 210,
+
+          this.direction = 'up'
       
           this.gameStop = false
         }
@@ -508,24 +554,46 @@ window.onload = () => {
             ctx.drawImage(krakenImg, this.x, this.y, this.w, this.h)
         }
         move() {
-            if (!this.gameStop && this.y <= canvas.height) {
-            this.moveUp()
-        }   else if (!this.gameStop && this.y > canvas.height) {
-            console.log('under y')
+            /* if (!this.gameStop && this.y > 700) {
+                this.moveUp()
+                console.log('under y')
+            }
+            if (!this.gameStop && this.y <= 700) {
+                console.log('should go down')
             this.moveDown()
         }   if (this.x > 1400) { 
-            this.x = 0
-            this.y = (Math.floor(Math.random() * 560)+ 70 )
+                this.x = -300
+                this.y = (Math.floor(Math.random() * 700) )
+          } */
+
+          if (this.y < 700) {
+            this.direction = 'down'
+          } else if (this.y >= 700) {
+            this.directioon = 'up'
           }
-        }
-        moveDown() {
+
+          if (this.direction ==='up') {
+            this.x += 2*speed
+            this.y -= 2*speed
+          }else {
+            this.x += 2*speed
+            this.y += 2*speed
+          }
+
+          if (this.x > 1400) { 
+            this.x = -300
+            this.y = (Math.floor(Math.random() * 700) )
+      }     console.log(this.y)
+            console.log(this.direction)
+        } 
+       /*  moveDown() {
             this.x += 2*speed
             this.y += 2*speed
         }
         moveUp() {
             this.x += 2*speed
             this.y -= 2*speed
-        }
+        } */
     }
 
     class Life {
@@ -553,8 +621,8 @@ window.onload = () => {
 
     function drawGameOver() {
         let text = 'GAME OVER'
-        ctx.fillStyle = "black"
-        ctx.font = "70px Arial"
+        ctx.fillStyle = "white"
+        ctx.font = "80px Arial"
         ctx.fillText(text, 40,200)
         }
 

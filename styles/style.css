@@ -48,10 +48,13 @@ h1 {
     color: white;
     cursor: pointer;
     margin: 15px;
+    min-width: 220px;
 }
 
 #canvas {
-    background-color: white;
+    background-image: url(/images/finalback.jpg);
+    background-repeat: no-repeat;
+    background-size: 3000px 700px;
     border: 3px solid #f9b143;
 }
 .banner {
@@ -151,12 +154,16 @@ h1 {
 #legend-list {
     display: flex;
     flex-direction: row;
-    align-items: center;
     justify-content: center;
     list-style: none;
 }
-#legend-list  li{
+#legend-list > ul{
     list-style: none;
+    display:block
+}
+
+.icon {
+    height: 30px;
 }
 
 .hidden {
