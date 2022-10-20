@@ -20,6 +20,7 @@ body {
     font-size: 18px;
     background-image: url(/images/main-img.png);
     background-size: 100%;
+    background-position: left 20%;
     background-repeat: no-repeat;
     background-color: #4ac7f4;
 }
@@ -37,10 +38,14 @@ h1 {
     border: 3px solid #0070a2;
     border-radius: 5px;
     padding: 20px;
-    font-size: 64px;
+    font-size: 4.5rem;
     color: #0070a2;
     
     text-transform: uppercase;
+}
+header > p {
+    color: #0070a2;
+    font-size: 2rem;
 }
 .start-button {
     background-color: #f9b143;
