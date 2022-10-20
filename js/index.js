@@ -21,6 +21,12 @@ const drawGameOver = () => {
     ctx.fillStyle = "white"
     ctx.font = "70px Arial"
     ctx.fillText(text, 40,200)
+    setTimeout(function() {
+        gameOverSound.play()
+        }, 2000);
+    setTimeout(function() {
+        gameUpdateStop = true
+        }, 1000);
     }
 
 // IMAGE-COLLECTION:
@@ -56,14 +62,33 @@ planTopImg.src = "/images/seaweeddown1.png"
 let wormImg = new Image();
 wormImg.src = "/images/worm.webp"
 
-const eelImg = new Image ();
+const eelImg = new Image();
 eelImg.src = "/images/eel1.png"
 
-const krakenImg = new Image ();
+const krakenImg = new Image();
 krakenImg.src = "/images/kraken2.png"
 
-const heartImg = new Image ();
+const heartImg = new Image();
 heartImg.src = "/images/heart.png"
+
+// SOUND-COLLECTION:
+let hurtSound = new Audio('/sounds/hurt-sound.wav');
+hurtSound.volume = 0.2;
+
+let collectHeartSound = new Audio('/sounds/collectHeart.wav');
+collectHeartSound.volume = 0.2;
+
+let collectWormSound = new Audio('/sounds/collectWorm.wav');
+collectWormSound.volume = 0.2;
+
+let gameOverSound = new Audio('/sounds/gameOver.wav');
+gameOverSound.volume = 0.2;
+
+let levelUpSound = new Audio('/sounds/levelUp.wav');
+levelUpSound.volume = 0.2;
+
+let getCoughtSound = new Audio('/sounds/fishingLine.wav');
+getCoughtSound.volume = 0.2;
 
 // OBSTACLE-ARRAYS:
 
@@ -74,6 +99,7 @@ let highScore;
 let speed = 1;
 let player; // lex, nemo, cro, finn
 let playerImg;
+let gameUpdateStop = false;
 
 
 
@@ -177,6 +203,7 @@ window.onload = () => {
             console.log('levelUp')
             level ++
             speed += 0.3
+            levelUpSound.play()
         }
         
         
@@ -190,6 +217,7 @@ window.onload = () => {
             hook.x = 0
             wormCount ++
             score += 200
+            collectWormSound.play()
                 if (score % 1000=== 0) {
                     levelUp()
                 }
@@ -197,6 +225,7 @@ window.onload = () => {
                 fish.getPulledUp()
                 worm.getPulledUp()
                 hook.getPulledUp()
+                getCoughtSound.play()
                 gameOver()
                 }
             } 
@@ -208,6 +237,7 @@ window.onload = () => {
                 life.y = Math.floor(Math.random() * 300)+ 100
                 if (healthPoints < 10) {
                     healthPoints ++
+                    collectHeartSound.play()
                     }
                 } 
             }
@@ -252,6 +282,7 @@ window.onload = () => {
                         break;
                     }
                 } else {
+                    hurtSound.play()
                     switch(player) {
                         case 'nemo':
                             playerImg = fishImgHurt
@@ -308,12 +339,6 @@ window.onload = () => {
             ctx.fillText(`Level ${level}`, 640,40)
         }
 
-        const drawGameOver = () => {
-            let text = 'GAME OVER'
-            ctx.fillStyle = "white"
-            ctx.font = "70px Arial"
-            ctx.fillText(text, 40,200)
-            }
 
         const gameOver = () => {
             background.gameStop = true
@@ -386,6 +411,9 @@ window.onload = () => {
 
 
         const update = () => {
+            if (gameUpdateStop) {
+                return
+            }
             ctx.clearRect(0,0,canvas.width, canvas.height)
             background.draw()
             background.move()
