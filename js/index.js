@@ -28,16 +28,24 @@ const backgrImg = new Image();
 backgrImg.src = "/images/finalback.jpg"
 
 let fishImg = new Image();
-fishImg.src = "/images/fish-fin.png" // "/images/fish-hurt.png"
+fishImg.src = "/images/fish-fin.png"
+let fishImgHurt = new Image();
+fishImgHurt.src = "/images/fish-hurt.png"
 
-let crabImg = new Image();
-crabImg.src = "/images/clown-fish.png" // "/images/crab-hurt.png"
+let clownImg = new Image();
+clownImg.src = "/images/clown-fish.png"
+let clownImgHurt = new Image();
+clownImgHurt.src = "/images/clownfish-hurt.png"
 
-let octoImg = new Image();
-octoImg.src = "/images/yellow-fish.png" // "/images/yellow-fish-hurt.png"
+let lexImg = new Image();
+lexImg.src = "/images/yellow-fish.png"
+let lexImgHurt = new Image();
+lexImgHurt.src =  "/images/yellow-fish-hurt.png"
 
-let sharkImg = new Image();
-sharkImg.src = "/images/pink-fish.png" // "/images/shark-hurt.png"
+let pinkImg = new Image();
+pinkImg.src = "/images/pink-fish.png"
+let pinkImgHurt = new Image();
+pinkImgHurt.src = "/images/pink-fish-hurt.png"
 
 const planBottImg = new Image();
 planBottImg.src = "/images/seaweedup1.png"
@@ -64,7 +72,8 @@ let wormCount = 0;
 let score = 0;
 let highScore;
 let speed = 1;
-let playerImg
+let player; // lex, nemo, cro, finn
+let playerImg;
 
 
 
@@ -82,25 +91,29 @@ window.onload = () => {
     choseLexBtn.addEventListener('click', () => {
         selectionModal.classList.add('hidden')
         gameModal.classList.remove('hidden')
-        playerImg = octoImg
+        playerImg = lexImg
+        player = 'lex'
     })
     
     choseNemoBtn.addEventListener('click', () => {
         selectionModal.classList.add('hidden')
         gameModal.classList.remove('hidden')
         playerImg = fishImg
+        player = 'nemo'
     })
     
     choseCroBtn.addEventListener('click', () => {
         selectionModal.classList.add('hidden')
         gameModal.classList.remove('hidden')
-        playerImg = crabImg
+        playerImg = clownImg
+        player = 'cro'
     })
     
     choseFinnBtn.addEventListener('click', () => {
         selectionModal.classList.add('hidden')
         gameModal.classList.remove('hidden')
-        playerImg = sharkImg
+        playerImg = pinkImg
+        player = 'finn'
     })
     
 
@@ -223,11 +236,37 @@ window.onload = () => {
                 }
         }
         const checkWound = () => {
-            if (!fish.wounded) {
-                fishImg.src = "/images/fish-fin.png"
-            } else {
-                fishImg.src = "/images/fish-hurt.png"
-                }
+                if (!fish.wounded) {
+                switch(player) {
+                    case 'nemo':
+                        playerImg = fishImg
+                        break;
+                    case 'cro':
+                        playerImg = clownImg
+                        break;
+                    case 'lex':
+                        playerImg = lexImg
+                        break;
+                    case 'finn':
+                        playerImg = pinkImg
+                        break;
+                    }
+                } else {
+                    switch(player) {
+                        case 'nemo':
+                            playerImg = fishImgHurt
+                            break;
+                        case 'cro':
+                            playerImg  = clownImgHurt
+                            break;
+                        case 'lex':
+                            playerImg  = lexImgHurt
+                            break;
+                        case 'finn':
+                            playerImg  = pinkImgHurt
+                            break;
+                        }
+                }     
             } 
 
         const checkCollisionsEel = () => {
