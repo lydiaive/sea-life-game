@@ -1,6 +1,6 @@
 # sea-life-game
 Canvas based Game in Sea-Life Style:
-![Sceen of the Game](/images/Bildschirmfoto 2022-10-20 um 13.31.35.png)
+![Sceen of the Game](/images/sceenGame.png)
 
  - Classic "Collect & Avoid" 2D-Game
  - Degree of Difficulty increases with every Level
