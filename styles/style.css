@@ -10,7 +10,7 @@ sand #f9b143
 */
 @font-face {
     font-family: myFont;
-    src: url(/fonts/Overpass-Regular.ttf);
+    src: url(./fonts/Overpass-Regular.ttf);
 }
 
 
@@ -18,7 +18,7 @@ body {
     margin: 0;
     font-family: myFont, Arial, Helvetica, sans-serif;
     font-size: 18px;
-    background-image: url(/images/main-img.png);
+    background-image: url(../images/main-img.png);
     background-size: 100%;
     background-position: left 20%;
     background-repeat: no-repeat;
@@ -73,7 +73,7 @@ header > p {
 }
 
 #canvas {
-    background-image: url(/images/finalback.jpg);
+    background-image: url(./images/finalback.jpg);
     background-repeat: no-repeat;
     background-size: 3000px 500px;
     border: 3px solid #f9b143;
