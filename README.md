@@ -10,6 +10,7 @@ Canvas based Game in Sea-Life Style:
  - avoid the Obstactes that will steal your Healthpoints
  - don't let yourself be cought by the fishermen
  - ...stay alive as long as possible
+
 ## Gaim Instructions
  - choose the Character you want to be your Main-Player
  - collect Worms and get 200 Points each
@@ -28,4 +29,9 @@ Canvas based Game in Sea-Life Style:
  - Hover & Click Effects for the Webpage-Buttons
  - Retry-Button
  - Air-Bubble Special Effects
+
+## Links:
+[Game](https://slides.com/d/hLoudU0/live)
+[Presentation](https://lydiaive.github.io/sea-life-game/)
+ 
 
