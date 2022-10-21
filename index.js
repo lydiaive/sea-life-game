@@ -71,8 +71,8 @@ krakenImg.src = "./images/kraken2.png"
 const heartImg = new Image();
 heartImg.src = "./images/heart.png"
 
-const singleBubble = new Image();
-singleBubble.scr = "./images/bubbles-original.png"
+// const singleBubble = new Image();
+// singleBubble.scr = "./images/bubbles-original.png"
 
 // SOUND-COLLECTION:
 let hurtSound = new Audio('./sounds/hurt-sound.wav');
@@ -149,14 +149,11 @@ window.onload = () => {
     startGameBtn.onclick = () => {
         startGameBtn.id = 'pause-button'
         startGameBtn.innerText = 'PAUSE'
-        console.log(startGameBtn)
         startGame();
     }
    
 
     function startGame() {
-        console.log('Game started')
-
         const background = new Background
         const fish = new Fish
         const worm = new Worm
@@ -164,8 +161,7 @@ window.onload = () => {
         const eel = new Eel
         const kraken = new Kraken
         const life = new Life
-        const bubbles = new Bubble
-        console.log(bubbles)
+        // const bubbles = new Bubble
 
         let healthPoints = 10;
         let arrLengthPlant = 4;
@@ -184,7 +180,6 @@ window.onload = () => {
                 startGameBtn.id = 'pause-button'
                 startGameBtn.innerText = 'PAUSE'
             }
-            console.log(startGameBtn.innerText)
         }
         
 
@@ -205,7 +200,6 @@ window.onload = () => {
             })
 
         const levelUp = () => {
-            console.log('levelUp')
             level ++
             speed += 0.3
             levelUpSound.play()
@@ -353,7 +347,7 @@ window.onload = () => {
             eel.gameStop = true
             life.gameStop = true
             kraken.gameStop = true
-            bubbles.gameStop = true
+            // bubbles.gameStop = true
             plantBottomArr.forEach(el => {
                 el.gameStop = true
                 })
@@ -370,7 +364,7 @@ window.onload = () => {
             eel.gameStop = true
             life.gameStop = true
             kraken.gameStop = true
-            bubbles.gameStop = true
+            // bubbles.gameStop = true
             plantBottomArr.forEach(el => {
                 el.gameStop = true
                 })
@@ -384,7 +378,7 @@ window.onload = () => {
             eel.gameStop = false
             life.gameStop = false
             kraken.gameStop = false
-            bubbles.gameStop = false
+            // bubbles.gameStop = false
             plantBottomArr.forEach(el => {
                 el.gameStop = false
                 })
@@ -434,9 +428,8 @@ window.onload = () => {
             kraken.move()
             life.draw()
             life.move()
-            bubbles.draw()
-            bubbles.move()
-            console.log(bubbles)
+            // bubbles.draw()
+            // bubbles.move()
             drawScore()
             drawHealth()
             drawLevel()
@@ -709,7 +702,7 @@ window.onload = () => {
         }
     }
 
-    class Bubble {
+/*     class Bubble {
         constructor() {
           this.x = 300,
           this.y = 300,
@@ -720,7 +713,6 @@ window.onload = () => {
         }
         draw() {
           ctx.drawImage(singleBubble, this.x, this.y, this.w, this.h)
-          console.log('drawn')
         }
         move() {
             if (!this.gameStop) {
@@ -730,6 +722,6 @@ window.onload = () => {
             this.y = 300
             }
         }
-    }
+    } */
 
 }
