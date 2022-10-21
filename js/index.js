@@ -31,7 +31,7 @@ const drawGameOver = () => {
 
 // IMAGE-COLLECTION:
 const backgrImg = new Image();
-backgrImg.src = "./images/finalback.jpg"
+backgrImg.src = "../images/finalback.jpg"
 
 let fishImg = new Image();
 fishImg.src = "./images/fish-fin.png"
