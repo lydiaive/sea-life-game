@@ -75,22 +75,22 @@ const singleBubble = new Image();
 singleBubble.scr = "./images/bubbles-original.png"
 
 // SOUND-COLLECTION:
-let hurtSound = new Audio('/sounds/hurt-sound.wav');
+let hurtSound = new Audio('./sounds/hurt-sound.wav');
 hurtSound.volume = 0.2;
 
-let collectHeartSound = new Audio('/sounds/collectHeart.wav');
+let collectHeartSound = new Audio('./sounds/collectHeart.wav');
 collectHeartSound.volume = 0.2;
 
-let collectWormSound = new Audio('/sounds/collectWorm.wav');
+let collectWormSound = new Audio('./sounds/collectWorm.wav');
 collectWormSound.volume = 0.2;
 
-let gameOverSound = new Audio('/sounds/gameOver.wav');
+let gameOverSound = new Audio('./sounds/gameOver.wav');
 gameOverSound.volume = 0.2;
 
-let levelUpSound = new Audio('/sounds/levelUp.wav');
+let levelUpSound = new Audio('./sounds/levelUp.wav');
 levelUpSound.volume = 0.2;
 
-let getCoughtSound = new Audio('/sounds/fishingLine.wav');
+let getCoughtSound = new Audio('./sounds/fishingLine.wav');
 getCoughtSound.volume = 0.2;
 
 // OBSTACLE-ARRAYS:
