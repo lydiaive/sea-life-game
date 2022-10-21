@@ -31,66 +31,66 @@ const drawGameOver = () => {
 
 // IMAGE-COLLECTION:
 const backgrImg = new Image();
-backgrImg.src = "../images/finalback.jpg"
+backgrImg.src = "./images/finalback.jpg"
 
 let fishImg = new Image();
-fishImg.src = "../images/fish-fin.png"
+fishImg.src = "./images/fish-fin.png"
 let fishImgHurt = new Image();
-fishImgHurt.src = "../images/fish-hurt.png"
+fishImgHurt.src = "./images/fish-hurt.png"
 
 let clownImg = new Image();
-clownImg.src = "../images/clown-fish.png"
+clownImg.src = "./images/clown-fish.png"
 let clownImgHurt = new Image();
-clownImgHurt.src = "../images/clownfish-hurt.png"
+clownImgHurt.src = "./images/clownfish-hurt.png"
 
 let lexImg = new Image();
-lexImg.src = "../images/yellow-fish.png"
+lexImg.src = "./images/yellow-fish.png"
 let lexImgHurt = new Image();
-lexImgHurt.src =  "../images/yellow-fish-hurt.png"
+lexImgHurt.src =  "./images/yellow-fish-hurt.png"
 
 let pinkImg = new Image();
-pinkImg.src = "../images/pink-fish.png"
+pinkImg.src = "./images/pink-fish.png"
 let pinkImgHurt = new Image();
-pinkImgHurt.src = "../images/pink-fish-hurt.png"
+pinkImgHurt.src = "./images/pink-fish-hurt.png"
 
 const planBottImg = new Image();
-planBottImg.src = "../images/seaweedup1.png"
+planBottImg.src = "./images/seaweedup1.png"
 
 const planTopImg = new Image();
-planTopImg.src = "../images/seaweeddown1.png"
+planTopImg.src = "./images/seaweeddown1.png"
 
 let wormImg = new Image();
-wormImg.src = "../images/worm.webp"
+wormImg.src = "./images/worm.webp"
 
 const eelImg = new Image();
-eelImg.src = "../images/eel1.png"
+eelImg.src = "./images/eel1.png"
 
 const krakenImg = new Image();
-krakenImg.src = "../images/kraken2.png"
+krakenImg.src = "./images/kraken2.png"
 
 const heartImg = new Image();
-heartImg.src = "../images/heart.png"
+heartImg.src = "./images/heart.png"
 
 const singleBubble = new Image();
-singleBubble.scr = "../images/bubbles-original.png"
+singleBubble.scr = "./images/bubbles-original.png"
 
 // SOUND-COLLECTION:
-let hurtSound = new Audio('../sounds/hurt-sound.wav');
+let hurtSound = new Audio('./sounds/hurt-sound.wav');
 hurtSound.volume = 0.2;
 
-let collectHeartSound = new Audio('../sounds/collectHeart.wav');
+let collectHeartSound = new Audio('./sounds/collectHeart.wav');
 collectHeartSound.volume = 0.2;
 
-let collectWormSound = new Audio('../sounds/collectWorm.wav');
+let collectWormSound = new Audio('./sounds/collectWorm.wav');
 collectWormSound.volume = 0.2;
 
-let gameOverSound = new Audio('../sounds/gameOver.wav');
+let gameOverSound = new Audio('./sounds/gameOver.wav');
 gameOverSound.volume = 0.2;
 
-let levelUpSound = new Audio('../sounds/levelUp.wav');
+let levelUpSound = new Audio('./sounds/levelUp.wav');
 levelUpSound.volume = 0.2;
 
-let getCoughtSound = new Audio('../sounds/fishingLine.wav');
+let getCoughtSound = new Audio('./sounds/fishingLine.wav');
 getCoughtSound.volume = 0.2;
 
 // OBSTACLE-ARRAYS:
@@ -249,10 +249,10 @@ window.onload = () => {
 
         const checkTrap = () => {
             if (worm.trap == false) {
-                wormImg.src = "../images/worm.webp" 
+                wormImg.src = "./images/worm.webp" 
                 return
             } else {
-                wormImg.src = "../images/worm(3).png"
+                wormImg.src = "./images/worm(3).png"
                 hook.h = worm.y
                 hook.draw()
                 hook.move()
